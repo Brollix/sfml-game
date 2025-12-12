@@ -42,9 +42,12 @@ build_error.txt
 *.bak
 *.backup
 
-# Cursor files
+# Cursor files (IDE personal)
 .cursor/
 .cursorrules
 .cursorignore
 .cursorconfig
 .cursorhistory
+*.cursor
+.cursorprojects
+cursor.log
