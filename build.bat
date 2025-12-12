@@ -1,31 +1,31 @@
 @echo off
-REM Build script for Windows
-REM Requirements: CMake and MinGW installed
+REM Script para compilar en Windows
+REM Requisitos: CMake y MinGW instalados
 
 echo ============================
 echo Building SFML Game (Windows)
 echo ============================
 
-REM Configure CMake
-echo Configuring...
+REM Configura CMake
+echo Configurando...
 cmake -S . -B build -G "MinGW Makefiles"
 if %ERRORLEVEL% NEQ 0 (
-    echo Configuration failed!
+    echo La configuración falló!
     pause
     exit /b %ERRORLEVEL%
 )
 
-REM Build
-echo Building...
+REM Compila
+echo Compilando...
 cmake --build build
 if %ERRORLEVEL% NEQ 0 (
-    echo Build failed!
+    echo La compilación falló!
     pause
     exit /b %ERRORLEVEL%
 )
 
-REM Copy DLLs
-echo Copying DLLs...
+REM Copia las DLLs
+echo Copiando DLLs...
 if exist build\_deps\sfml-build\lib\*.dll (
     copy build\_deps\sfml-build\lib\*.dll build\ >nul 2>&1
 )
@@ -34,8 +34,8 @@ if exist build\_deps\sfml-src\extlibs\bin\x64\openal32.dll (
 )
 
 echo ============================
-echo Build successful!
-echo Run with: build\sfml-game.exe
+echo Compilación exitosa!
+echo Corré con: build\sfml-game.exe
 echo ============================
 pause
 

@@ -16,7 +16,7 @@ private:
                 isRunning = false;
             }
 
-            // Handle keyboard input
+            // Maneja el input del teclado
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Escape) {
                     isRunning = false;
@@ -26,13 +26,13 @@ private:
     }
 
     void update(float dt) {
-        // Game logic here
+        // Lógica del juego acá
     }
 
     void render() {
-        window.clear(sf::Color(20, 20, 30)); // Dark background
+        window.clear(sf::Color(20, 20, 30)); // Fondo oscuro
         
-        // Render game objects here
+        // Renderiza los objetos del juego acá
         
         window.display();
     }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 
 project(sfml-game)
 
-# Set C++ Standard
+# Establece el estándar de C++
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -14,23 +14,23 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(sfml)
 
-# Add source files
+# Agrega los archivos fuente
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 
-# Create executable
+# Crea el ejecutable
 add_executable(sfml-game ${SOURCES})
 
-# Link SFML libraries
+# Linkea las librerías de SFML
 target_link_libraries(sfml-game PRIVATE sfml-graphics sfml-window sfml-system)
 target_include_directories(sfml-game PRIVATE ${CMAKE_SOURCE_DIR})
 
-# Copy assets to build directory (optional but recommended for running from build folder)
-# This assumes you have an 'assets' folder in your project root
+# Copia los assets al directorio de build (opcional pero recomendado para correr desde la carpeta build)
+# Esto asume que tenés una carpeta 'assets' en la raíz del proyecto
 if(EXISTS "${CMAKE_SOURCE_DIR}/assets")
     add_custom_command(TARGET sfml-game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         "${CMAKE_SOURCE_DIR}/assets"
         "$<TARGET_FILE_DIR:sfml-game>/assets"
-        COMMENT "Copying assets to output directory"
+        COMMENT "Copiando assets al directorio de salida"
     )
 endif()
