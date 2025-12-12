@@ -37,5 +37,4 @@ echo ============================
 echo Compilación exitosa!
 echo Corré con: build\sfml-game.exe
 echo ============================
-pause
 

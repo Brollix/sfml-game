@@ -1,7 +1,6 @@
-# SFML Game Template
+# SFML Game
 
-Template minimalista para juegos 2D con SFML.  
-Listo para Windows y Linux. Un solo `.cpp`, todo lo demás en headers.
+Listo para Windows y Linux. Un solo `.cpp`, todo lo demás en headers (`.h`).
 
 ## Estructura del Proyecto
 

@@ -13,4 +13,3 @@ if %ERRORLEVEL% EQU 0 (
         echo No se encontró el ejecutable!
     )
 )
-pause
