@@ -1,7 +1,7 @@
 # SFML Game Template
 
-Template básico para desarrollar juegos 2D con SFML en C++17.  
-Configurado para desarrollo multiplataforma (Windows y Linux).
+Template minimalista para juegos 2D con SFML.  
+Listo para Windows y Linux. Un solo `.cpp`, todo lo demás en headers.
 
 ## Estructura del Proyecto
 
@@ -26,190 +26,113 @@ sfml-game/
 
 - **CMake** 3.17 o superior ([Descargar](https://cmake.org/download/))
 - **MinGW-w64** o **Visual Studio** con C++17
-- Git (opcional, para clonar el repositorio)
+- Git (opcional)
+
+> SFML se descarga automáticamente durante la compilación.
 
 ### Linux
 
-- **CMake** 3.17 o superior
-- **GCC** o **Clang** con soporte C++17
-- Librerías del sistema necesarias:
+- **CMake** 3.17+ y **GCC**/Clang con C++17
+- Dependencias mínimas:
 
 #### Ubuntu/Debian
 ```bash
-sudo apt update
-sudo apt install build-essential cmake git
-sudo apt install libx11-dev libxrandr-dev libxcursor-dev libxi-dev libudev-dev libgl1-mesa-dev
-sudo apt install libflac-dev libvorbis-dev libopenal-dev
+sudo apt install build-essential cmake libgl1-mesa-dev libx11-dev
 ```
 
 #### Fedora/RHEL
 ```bash
-sudo dnf install cmake gcc-c++ git
-sudo dnf install libX11-devel libXrandr-devel libXcursor-devel libXi-devel systemd-devel mesa-libGL-devel
-sudo dnf install flac-devel libvorbis-devel openal-soft-devel
+sudo dnf install cmake gcc-c++ mesa-libGL-devel libX11-devel
 ```
 
 #### Arch Linux
 ```bash
-sudo pacman -S cmake gcc git
-sudo pacman -S libx11 libxrandr libxcursor libxi systemd mesa
-sudo pacman -S flac libvorbis openal
+sudo pacman -S cmake gcc mesa libx11
 ```
 
-## Compilación y Ejecución
+> SFML se descarga automáticamente. Solo necesitas OpenGL y X11.  
+> *Opcional:* `libudev-dev` si usarás joysticks.
 
-### Windows
+## Compilar y Ejecutar
 
-#### Solo compilar:
+**Windows:**
 ```batch
-build.bat
+run.bat          # Compila y ejecuta
+build.bat        # Solo compila
 ```
 
-#### Compilar y ejecutar:
-```batch
-run.bat
-```
-
-### Linux
-
-#### Solo compilar:
+**Linux:**
 ```bash
-chmod +x build.sh run.sh  # Solo la primera vez
-./build.sh
+chmod +x *.sh    # Solo la primera vez
+./run.sh         # Compila y ejecuta
+./build.sh       # Solo compila
 ```
 
-#### Compilar y ejecutar:
-```bash
-./run.sh
-```
+## Cómo Desarrollar
 
-## Desarrollo
+### Agregar clases (header-only)
 
-### Agregar nuevas clases
-
-Este proyecto usa **header-only** para todas las clases excepto `main.cpp`.
-
-**Ejemplo - Agregar una clase Player:**
+Crea un nuevo `.h` en `src/`:
 
 ```cpp
 // src/Player.h
 #pragma once
-
 #include <SFML/Graphics.hpp>
 
 class Player {
-private:
-    sf::Vector2f position;
-    sf::RectangleShape shape;
-
 public:
-    Player(float x, float y) 
-        : position(x, y)
-        , shape(sf::Vector2f(50.f, 50.f)) {
-        shape.setPosition(position);
-        shape.setFillColor(sf::Color::Green);
-    }
-
-    void update(float deltaTime) {
-        // Lógica de actualización
-    }
-
-    void render(sf::RenderWindow& window) {
-        window.draw(shape);
-    }
-
-    sf::Vector2f getPosition() const { return position; }
-    void setPosition(float x, float y) {
-        position = sf::Vector2f(x, y);
-        shape.setPosition(position);
-    }
+    Player(float x, float y) : pos(x, y) {}
+    
+    void update(float dt) { /* lógica aquí */ }
+    void render(sf::RenderWindow& w) { /* dibujar aquí */ }
+    
+private:
+    sf::Vector2f pos;
 };
 ```
 
-Luego incluirla en `Game.h`:
-```cpp
-#include "Player.h"
-```
+Inclúyela en `Game.h`: `#include "Player.h"`
 
 ### Agregar recursos
 
-Coloca tus recursos en la carpeta `assets/`. El CMake los copiará automáticamente al directorio de build.
+Pon tus imágenes/sonidos en `assets/`. Se copian automáticamente al build:
 
 ```cpp
-// Cargar una textura
-sf::Texture texture;
-if (!texture.loadFromFile("assets/player.png")) {
-    // Error al cargar
-}
+sf::Texture tex;
+tex.loadFromFile("assets/player.png");
 ```
 
-## Estructura del Código
+## Estructura Básica
 
-### main.cpp
-Punto de entrada mínimo, solo crea y ejecuta el juego:
-```cpp
-#include "Game.h"
+**`main.cpp`** - Solo crea y ejecuta el juego  
+**`Game.h`** - Game loop con `processEvents()`, `update()`, `render()`
 
-int main() {
-    Game game;
-    game.run();
-    return 0;
-}
-```
+**Controles:** ESC o cerrar ventana para salir
 
-### Game.h
-Contiene el game loop principal:
-- `processEvents()` - Maneja input del usuario
-- `update()` - Actualiza la lógica del juego
-- `render()` - Dibuja en pantalla
+## Limpiar Build
 
-## Controles Predeterminados
+**Windows:** `rmdir /s /q build`  
+**Linux:** `rm -rf build`
 
-- **ESC** - Cerrar el juego
-- **X** (botón de cerrar) - Cerrar el juego
+## Desarrollo Colaborativo
 
-## Limpieza del Build
+El `.gitignore` está configurado para que ambos puedan trabajar sin conflictos:
+- Se ignora el directorio `build/`
+- Se ignoran archivos compilados y temporales
+- Solo se sincroniza código fuente y assets
 
-Para limpiar los archivos compilados y empezar desde cero:
+## Problemas Comunes
 
-### Windows
-```batch
-rmdir /s /q build
-```
+**Windows: "cmake no se reconoce como comando"**
+→ Agrega CMake al PATH del sistema
 
-### Linux
-```bash
-rm -rf build
-```
-
-## Notas para Desarrollo Colaborativo
-
-### Git Workflow Recomendado
-
-1. El `.gitignore` ya está configurado para excluir:
-   - Directorio `build/`
-   - Archivos compilados
-   - Archivos de IDE
-   - Logs de build
-
-2. Los cambios en código fuente (`src/`) y recursos (`assets/`) se sincronizarán automáticamente.
-
-3. Ambos desarrolladores pueden trabajar simultáneamente sin conflictos de archivos temporales.
-
-### Troubleshooting
-
-#### Windows: "cmake no se reconoce como comando"
-- Asegúrate de que CMake esté en el PATH del sistema
-- O especifica la ruta completa: `"C:\Program Files\CMake\bin\cmake.exe"`
-
-#### Linux: "Permission denied" al ejecutar scripts
+**Linux: "Permission denied" al ejecutar scripts**
 ```bash
 chmod +x build.sh run.sh
 ```
 
-#### Error: "No se puede encontrar -lsfml-graphics"
-- En Linux: Instala las dependencias del sistema (ver sección Requisitos)
-- El proyecto descarga SFML automáticamente, pero necesita las librerías del sistema
+**Primer build tarda mucho**
+→ Es normal, SFML se descarga y compila automáticamente (solo la primera vez)
 
 ## Recursos
 
