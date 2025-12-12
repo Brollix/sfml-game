@@ -6,6 +6,8 @@ class Game {
 private:
     sf::RenderWindow window;
     bool isRunning;
+    sf::Clock clock;
+    float dt;
 
     void processEvents() {
         sf::Event event;
@@ -23,7 +25,7 @@ private:
         }
     }
 
-    void update() {
+    void update(float dt) {
         // Game logic here
     }
 
@@ -36,16 +38,16 @@ private:
     }
 
 public:
-    Game() 
-        : window(sf::VideoMode(800, 600), "SFML Game Template")
-        , isRunning(true) {
-        window.setFramerateLimit(60);
+    Game() : window(sf::VideoMode(800, 600), "SFML Game Template"), isRunning(true), dt(0.0f) {
+        
     }
 
     void run() {
         while (isRunning && window.isOpen()) {
+            dt = clock.restart().asSeconds();
+            
             processEvents();
-            update();
+            update(dt);
             render();
         }
         window.close();
