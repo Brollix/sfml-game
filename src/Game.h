@@ -39,7 +39,7 @@ private:
 
 public:
     Game() : window(sf::VideoMode(800, 600), "SFML Game Template"), isRunning(true), dt(0.0f) {
-        
+        window.setFramerateLimit(60);
     }
 
     void run() {
