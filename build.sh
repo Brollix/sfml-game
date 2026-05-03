@@ -24,6 +24,6 @@ fi
 
 echo "============================"
 echo "Build successful!"
-echo "Run with: ./build/sfml-game"
+echo "Run with: ./build/sfml-2.6-template"
 echo "============================"
 

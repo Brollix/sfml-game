@@ -5,6 +5,6 @@
 if [ $? -eq 0 ]; then
     echo ""
     echo "Running game..."
-    ./build/sfml-game
+    ./build/sfml-2.6-template
 fi
 

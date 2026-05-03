@@ -35,6 +35,6 @@ if exist build\_deps\sfml-src\extlibs\bin\x64\openal32.dll (
 
 echo ============================
 echo Compilación exitosa!
-echo Corré con: build\sfml-game.exe
+echo Corré con: build\sfml-2.6-template.exe
 echo ============================
 
