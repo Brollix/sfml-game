@@ -1,6 +1,9 @@
 # Build directories
 build/
+bin/
+out/
 cmake-build-*/
+vcpkg_installed/
 
 # CMake files
 CMakeCache.txt
@@ -9,6 +12,10 @@ cmake_install.cmake
 Makefile
 *.cmake
 !CMakeLists.txt
+CMakeUserPresets.json
+
+# Compilation database
+compile_commands.json
 
 # Compiled files
 *.exe
@@ -21,33 +28,52 @@ Makefile
 *.dll
 *.so
 *.dylib
+*.slo
+*.lo
+*.ilk
+*.pdb
+*.exp
 
 # IDE specific
+.vs/
 .vscode/
 .idea/
+.clangd/
+.cache/
 *.swp
 *.swo
 *~
-.DS_Store
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
 
-# Windows specific
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 desktop.ini
 
 # Build logs
 build_log.txt
 build_error.txt
+*.log
 
 # Backup files
 *.bak
 *.backup
+*.orig
 
 # Cursor files (IDE personal)
 .cursor/
-.cursorrules
 .cursorignore
 .cursorconfig
 .cursorhistory
 *.cursor
 .cursorprojects
 cursor.log
+# Nota: .cursorrules no se ignora para poder compartir las reglas del proyecto en el repositorio.

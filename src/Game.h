@@ -9,6 +9,8 @@ private:
     sf::Clock clock;
     float dt;
 
+    
+
     void processEvents() {
         sf::Event event;
         while (window.pollEvent(event)) {
