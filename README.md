@@ -13,7 +13,7 @@ A minimal, out-of-the-box template for rapid game prototyping with **SFML 2.6** 
 
 ## 🛠️ Prerequisites
 
-- **CMake 3.17+**
+- **CMake 3.17+** ([cmake.org](https://cmake.org/download/)). *Si la consola no lo reconoce, agrégalo al PATH: `Variables de entorno > Path > Añadir: C:\Program Files\CMake\bin`*
 - **C++17 Compiler** (MinGW, Visual Studio, GCC, or Clang)
 - **Linux only** (Ubuntu/Debian example): 
   `sudo apt install build-essential cmake libgl1-mesa-dev libx11-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev`
